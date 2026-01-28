@@ -8,6 +8,7 @@ const Button = ({
   disabled,
   icon,
   style = {},
+  textColor = "white",
 }) => {
   return (
     <Pressable
@@ -22,7 +23,9 @@ const Button = ({
       ]}
     >
       <View style={styles.content}>
-        {text && <Text style={styles.text}>{text}</Text>}
+        {text && (
+          <Text style={[styles.text, { color: textColor }]}>{text}</Text>
+        )}
         {icon && icon}
       </View>
     </Pressable>

@@ -1,13 +1,19 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from "react-native";
+import AuthProfile from "../(auth)/AuthProfile";
+import { useAuth } from "../../contexts/Auth/AuthContext";
+import NotAuthProfile from "../(auth)/NotAuthProfile";
 
 const ProfileScreen = () => {
-    return (
-        <View>
-            <Text>Profile</Text>
-        </View>
-    );
-}
+  const { user } = useAuth();
 
-const styles = StyleSheet.create({})
+  if (user) {
+    return <AuthProfile />;
+  }
+  if (!user){
+    return <NotAuthProfile />
+  }
+};
+
+const styles = StyleSheet.create({});
 
 export default ProfileScreen;

@@ -7,8 +7,11 @@ const FavouritesReducer = (state, action) => {
       return [...state, { ...action.payload }];
 
     case "REMOVE_FROM_FAVOURITES":
-      return state.filter((item) => item._id !== action.payload);
+      return state.filter((item) => item.id !== action.payload);
 
+    case "CLEAR_FAVOURITES":
+      return [];
+      
     default:
       return state;
   }

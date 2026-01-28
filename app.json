@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "react-native-shop",
-    "slug": "react-native-shop",
+    "name": "react-native-music",
+    "slug": "react-native-music",
+    "scheme": "soundflow",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -26,7 +27,8 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      "expo-audio"
     ]
   }
 }

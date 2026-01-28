@@ -4,63 +4,114 @@ import {
   Text,
   View,
   ActivityIndicator,
+  RefreshControl,
+  Image,
+  Pressable,
 } from "react-native";
-import ProductCard from "../../components/ProductCard";
+import TrackCard from "../../components/TrackCard";
+import { getTracks } from "../../services/tracks.services";
+import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "expo-router";
-import { useEffect, useState } from "react";
-import { ProductsAPI } from "../../api/products"; // ✅ шлях перевір
 
 const HomeScreen = () => {
+  const obj = useQuery({
+    queryKey: ["tracks"],
+    queryFn: () => getTracks(),
+  });
+
+  const { data: tracks = [], isLoading: loading, isRefetching, refetch } = obj;
   const router = useRouter();
-
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const loadProducts = async () => {
-      try {
-        const json = await ProductsAPI.getAll(); // ✅ запит до бекенду
-        setProducts(json.data); // бо бекенд повертає { data: [...] }
-      } catch (e) {
-        console.log("Products error:", e.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadProducts();
-  }, []);
-
   if (loading) {
     return (
       <View style={styles.center}>
-        <ActivityIndicator size="large" />
-        <Text>Loading...</Text>
+        <ActivityIndicator size="large" color={COLORS.green} />
+        <Text style={styles.loadingText}>Loading...</Text>
       </View>
     );
   }
 
   return (
-    <View style={{ flex: 1 }}>
-      <FlatList
-        data={products}
-        keyExtractor={(item) => item._id} // ✅ Mongo id
-        numColumns={2}
-        columnWrapperStyle={{ gap: 12 }}
-        contentContainerStyle={{ padding: 12, gap: 12 }}
-        renderItem={({ item }) => (
-          <ProductCard
-            product={item}
-            onProductPress={() => router.push(`/product/${item._id}`)} // ✅ Mongo id
+    <View style={styles.screen}>
+      <View style={styles.header}>
+        <Pressable onPress={() => {router.push("/profile")}}>
+          <Image
+            source={require("../../assets/user.png")}
+            style={styles.logo}
           />
+        </Pressable>
+        <View>
+          <Text style={styles.hTitle}>SoundFlow</Text>
+          <Text style={styles.hSub}>Recommended for you</Text>
+        </View>
+      </View>
+
+      <FlatList
+        data={tracks}
+        keyExtractor={(item) => item.id}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.listContent}
+        renderItem={({ item }) => (
+          <View style={styles.col}>
+            <TrackCard track={item} />
+          </View>
         )}
+        refreshControl={
+          <RefreshControl
+            refreshing={isRefetching}
+            onRefresh={refetch}
+            tintColor={COLORS.green}
+          />
+        }
       />
     </View>
   );
 };
 
+const GAP = 14;
+const COLORS = {
+  bg: "#0B0B0F",
+  card: "#14141A",
+  card2: "#101015",
+  text: "#EDEDED",
+  sub: "rgba(237,237,237,0.68)",
+  green: "#1DB954",
+};
+
 const styles = StyleSheet.create({
+  screen: { flex: 1, backgroundColor: COLORS.bg, paddingTop: 40 },
+
+  header: {
+    paddingHorizontal: GAP,
+    paddingTop: 10,
+    paddingBottom: 6,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+  },
+  hTitle: {
+    color: COLORS.text,
+    fontSize: 28,
+    fontWeight: "800",
+    letterSpacing: 0.2,
+  },
+  hSub: {
+    marginTop: 4,
+    color: COLORS.sub,
+    fontSize: 13,
+    fontWeight: "600",
+  },
+
+  listContent: {
+    padding: GAP,
+    paddingBottom: 28,
+  },
+  row: { gap: GAP, marginBottom: GAP },
+  col: { flex: 1 },
+
   center: { flex: 1, justifyContent: "center", alignItems: "center" },
+  loadingText: { marginTop: 10, color: "rgba(0, 0, 0, 0.6)" },
+
+  logo: { width: 50, height: 50 },
 });
 
 export default HomeScreen;

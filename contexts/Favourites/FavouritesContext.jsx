@@ -7,16 +7,16 @@ export const FavouritesContext = createContext(null);
 const FavouritesProvider = ({ children }) => {
   const [favourites, dispatch] = useReducer(FavouritesReducer, []);
 
-  useStorage("favourites", favourites, dispatch, "SET_FAVOURITES");
+  useStorage("favouritesMusic", favourites, dispatch, "SET_FAVOURITES");
 
   const addToFavourites = (product) =>
     dispatch({ type: "ADD_TO_FAVOURITES", payload: product });
 
-  const removeFromFavourites = (_id) =>
-    dispatch({ type: "REMOVE_FROM_FAVOURITES", payload: _id });
+  const removeFromFavourites = (id) =>
+    dispatch({ type: "REMOVE_FROM_FAVOURITES", payload: id });
 
-  const inFavourites = (_id) => favourites.some((item) => item._id === _id);
-  
+  const inFavourites = (id) => favourites.some((item) => item.id === id);
+
   return (
     <FavouritesContext.Provider
       value={{
