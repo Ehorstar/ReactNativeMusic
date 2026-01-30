@@ -1,11 +1,24 @@
 import { Ionicons } from "@expo/vector-icons";
-import { Tabs } from "expo-router";
+import { Tabs, usePathname } from "expo-router";
 import { StyleSheet } from "react-native";
 import PlayingLayout from "../../components/playingLayout";
 import { usePlayingStore } from "../../store/playingStore";
+import { useEffect } from "react";
 
 const TabsLayout = () => {
   const currentTrack = usePlayingStore((s) => s.currentTrack);
+  const pathname = usePathname();
+
+  const stop = usePlayingStore((s) => s.stop);
+
+  const isProfile = pathname === "/profile";
+
+  useEffect(() => {
+    if (isProfile) {
+      stop();
+    }
+  }, [isProfile, stop]);
+
   return (
     <>
       <Tabs
@@ -35,7 +48,7 @@ const TabsLayout = () => {
         <Tabs.Screen name="favourites" options={{ title: "Обрані треки" }} />
         <Tabs.Screen name="profile" options={{ title: "Профіль" }} />
       </Tabs>
-      {currentTrack && <PlayingLayout />}
+      {!isProfile && currentTrack && <PlayingLayout />}
     </>
   );
 };
