@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 import AuthProfile from "../(auth)/AuthProfile";
 import { useAuth } from "../../contexts/Auth/AuthContext";
 import NotAuthProfile from "../(auth)/NotAuthProfile";
@@ -9,8 +9,8 @@ const ProfileScreen = () => {
   if (user) {
     return <AuthProfile />;
   }
-  if (!user){
-    return <NotAuthProfile />
+  if (!user) {
+    return <NotAuthProfile />;
   }
 };
 

@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import { getTrackById } from "../../services/tracks.services";
 import { useQuery } from "@tanstack/react-query";
-import { useMemo } from "react";
 import { HOST } from "../../config/api";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Slider from "@react-native-community/slider";
@@ -42,15 +41,8 @@ const TrackScreen = () => {
   const seekTo = usePlayingStore((s) => s.seekTo);
   const timeLabel = usePlayingStore((s) => s.timeLabel());
 
-  const fullCoverUrl = useMemo(
-    () => (track ? toAbsolute(track.coverUrl) : ""),
-    [track],
-  );
-
-  const fullAudioUrl = useMemo(
-    () => (track ? toAbsolute(track.audioUrl) : ""),
-    [track],
-  );
+  const fullCoverUrl = toAbsolute(track.coverUrl);
+  const fullAudioUrl = toAbsolute(track.audioUrl);
 
   const isThisTrack = currentTrack?.id === track?.id;
   const progress = duration ? position / duration : 0;
@@ -210,7 +202,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
   },
 
-  sliderWrap: { marginTop: 18,  },
+  sliderWrap: { marginTop: 18 },
   slider: { width: "100%", height: 12 },
 
   controls: {

@@ -9,7 +9,6 @@ const formatTime = (ms = 0) => {
 };
 
 export const usePlayingStore = create((set, get) => ({
-  queue: [],
   currentTrack: null,
   isLoaded: false,
   isPlaying: false,
@@ -24,11 +23,12 @@ export const usePlayingStore = create((set, get) => ({
     if (!durationMillis) return 0;
     return Math.min(1, positionMillis / durationMillis);
   },
-
   timeLabel: () => {
     const { positionMillis, durationMillis } = get();
     return `${formatTime(positionMillis)} / ${formatTime(durationMillis)}`;
   },
+
+
 
   playTrack: async (track, uri) => {
     try {

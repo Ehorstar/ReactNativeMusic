@@ -21,10 +21,11 @@ const HomeScreen = () => {
 
   const { data: tracks = [], isLoading: loading, isRefetching, refetch } = obj;
   const router = useRouter();
+
   if (loading) {
     return (
       <View style={styles.center}>
-        <ActivityIndicator size="large" color={COLORS.green} />
+        <ActivityIndicator size="large" color="#1DB954" />
         <Text style={styles.loadingText}>Loading...</Text>
       </View>
     );
@@ -33,7 +34,11 @@ const HomeScreen = () => {
   return (
     <View style={styles.screen}>
       <View style={styles.header}>
-        <Pressable onPress={() => {router.push("/profile")}}>
+        <Pressable
+          onPress={() => {
+            router.push("/profile");
+          }}
+        >
           <Image
             source={require("../../assets/user.png")}
             style={styles.logo}
@@ -59,7 +64,7 @@ const HomeScreen = () => {
           <RefreshControl
             refreshing={isRefetching}
             onRefresh={refetch}
-            tintColor={COLORS.green}
+            tintColor="#1DB954"
           />
         }
       />
@@ -67,51 +72,65 @@ const HomeScreen = () => {
   );
 };
 
-const GAP = 14;
-const COLORS = {
-  bg: "#0B0B0F",
-  card: "#14141A",
-  card2: "#101015",
-  text: "#EDEDED",
-  sub: "rgba(237,237,237,0.68)",
-  green: "#1DB954",
-};
-
 const styles = StyleSheet.create({
-  screen: { flex: 1, backgroundColor: COLORS.bg, paddingTop: 40 },
+  screen: {
+    flex: 1,
+    backgroundColor: "#0B0B0F",
+    paddingTop: 40,
+  },
 
   header: {
-    paddingHorizontal: GAP,
+    paddingHorizontal: 14,
     paddingTop: 10,
     paddingBottom: 6,
     flexDirection: "row",
     alignItems: "center",
     gap: 12,
   },
+
   hTitle: {
-    color: COLORS.text,
+    color: "#EDEDED",
     fontSize: 28,
     fontWeight: "800",
     letterSpacing: 0.2,
   },
+
   hSub: {
     marginTop: 4,
-    color: COLORS.sub,
+    color: "rgba(237,237,237,0.68)",
     fontSize: 13,
     fontWeight: "600",
   },
 
   listContent: {
-    padding: GAP,
+    padding: 14,
     paddingBottom: 28,
   },
-  row: { gap: GAP, marginBottom: GAP },
-  col: { flex: 1 },
 
-  center: { flex: 1, justifyContent: "center", alignItems: "center" },
-  loadingText: { marginTop: 10, color: "rgba(0, 0, 0, 0.6)" },
+  row: {
+    gap: 14,
+    marginBottom: 14,
+  },
 
-  logo: { width: 50, height: 50 },
+  col: {
+    flex: 1,
+  },
+
+  center: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  loadingText: {
+    marginTop: 10,
+    color: "rgba(0, 0, 0, 0.6)",
+  },
+
+  logo: {
+    width: 50,
+    height: 50,
+  },
 });
 
 export default HomeScreen;

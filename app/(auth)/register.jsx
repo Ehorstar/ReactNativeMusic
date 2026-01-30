@@ -2,7 +2,6 @@ import { StyleSheet, Text, View } from "react-native";
 import AppTextInput from "../../UI/TextInput/AppTextInput";
 import { useState } from "react";
 import Button from "../../UI/Button/Button";
-import Separator from "../../UI/Separator/Separator";
 import { useAuth } from "../../contexts/Auth/AuthContext";
 import { useRouter } from "expo-router";
 import Feather from "@expo/vector-icons/Feather";

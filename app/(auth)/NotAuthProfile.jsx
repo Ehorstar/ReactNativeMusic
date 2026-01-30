@@ -8,6 +8,7 @@ const NotAuthProfile = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
+
         <Text style={styles.title}>Add Account</Text>
 
         <View style={styles.headerContent}>
@@ -15,6 +16,7 @@ const NotAuthProfile = () => {
           <Text style={styles.text}>Best tracks.</Text>
           <Text style={styles.text}>For you in SoundFlow.</Text>
         </View>
+        
       </View>
 
       <View style={styles.center}>

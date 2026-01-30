@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from "react";
+import { useContext } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import TrackCard from "../../components/TrackCard";
 import { FavouritesContext } from "../../contexts/Favourites/FavouritesContext";
@@ -40,23 +40,14 @@ const Favourites = () => {
   );
 };
 
-const GAP = 14;
-const COLORS = {
-  bg: "#0B0B0F",
-  card: "#14141A",
-  text: "#EDEDED",
-  sub: "rgba(237,237,237,0.68)",
-  green: "#1DB954",
-  border: "rgba(255,255,255,0.06)",
-};
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: COLORS.bg,
+    backgroundColor: "#0B0B0F",
   },
 
   header: {
-    paddingHorizontal: GAP,
+    paddingHorizontal: 14,
     paddingBottom: 10,
     flexDirection: "row",
     alignItems: "center",
@@ -64,7 +55,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    color: COLORS.text,
+    color: "#EDEDED",
     fontSize: 30,
     fontWeight: "800",
     letterSpacing: 0.2,
@@ -72,7 +63,7 @@ const styles = StyleSheet.create({
 
   subtitle: {
     marginTop: 4,
-    color: COLORS.sub,
+    color: "rgba(237,237,237,0.68)",
     fontSize: 13,
     fontWeight: "600",
   },
@@ -86,36 +77,36 @@ const styles = StyleSheet.create({
     borderRadius: 999,
     backgroundColor: "rgba(255,255,255,0.06)",
     borderWidth: 1,
-    borderColor: COLORS.border,
+    borderColor: "rgba(255,255,255,0.06)",
   },
 
   clearText: {
-    color: COLORS.text,
+    color: "#EDEDED",
     fontWeight: "700",
     fontSize: 13,
   },
 
   listContent: {
-    padding: GAP,
+    padding: 14,
     paddingBottom: 26,
   },
 
   empty: {
     flex: 1,
-    paddingHorizontal: GAP,
+    paddingHorizontal: 14,
     alignItems: "center",
     justifyContent: "center",
   },
 
   emptyTitle: {
-    color: COLORS.text,
+    color: "#EDEDED",
     fontSize: 18,
     fontWeight: "800",
   },
 
   emptySub: {
     marginTop: 8,
-    color: COLORS.sub,
+    color: "rgba(237,237,237,0.68)",
     textAlign: "center",
     fontWeight: "600",
     lineHeight: 18,

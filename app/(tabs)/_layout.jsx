@@ -11,8 +11,8 @@ const TabsLayout = () => {
       <Tabs
         screenOptions={({ route }) => ({
           headerShown: false,
-          tabBarActiveTintColor: COLORS.green,
-          tabBarInactiveTintColor: COLORS.text,
+          tabBarActiveTintColor: "#1DB954",
+          tabBarInactiveTintColor: "#EDEDED",
           tabBarStyle: {
             position: "absolute",
             backgroundColor: "rgba(18,18,18,0.85)",
@@ -40,15 +40,6 @@ const TabsLayout = () => {
   );
 };
 
-const GAP = 14;
-const COLORS = {
-  bg: "#0B0B0F",
-  card: "#14141A",
-  text: "#EDEDED",
-  sub: "rgba(237,237,237,0.68)",
-  green: "#1DB954",
-  border: "rgba(255,255,255,0.06)",
-};
 const styles = StyleSheet.create({});
 
 export default TabsLayout;
