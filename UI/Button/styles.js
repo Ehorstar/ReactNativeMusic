@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
   },
   danger: {
     backgroundColor: "#d40101ff",
+    borderRadius: 25,
   },
   icon: {
     backgroundColor: "transparent",

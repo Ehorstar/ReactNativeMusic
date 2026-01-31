@@ -3,12 +3,13 @@ import { Tabs, usePathname } from "expo-router";
 import { StyleSheet } from "react-native";
 import PlayingLayout from "../../components/playingLayout";
 import { usePlayingStore } from "../../store/playingStore";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { FavouritesContext } from "../../contexts/Favourites/FavouritesContext";
 
 const TabsLayout = () => {
   const currentTrack = usePlayingStore((s) => s.currentTrack);
   const pathname = usePathname();
-
+  const { favourites } = useContext(FavouritesContext);
   const stop = usePlayingStore((s) => s.stop);
 
   const isProfile = pathname === "/profile";
@@ -45,7 +46,22 @@ const TabsLayout = () => {
         })}
       >
         <Tabs.Screen name="index" options={{ title: "Головна" }} />
-        <Tabs.Screen name="favourites" options={{ title: "Обрані треки" }} />
+        <Tabs.Screen
+          name="favourites"
+          options={{
+            title: "Обрані треки",
+            tabBarBadge: favourites.length > 0 ? favourites.length : undefined,
+            tabBarBadgeStyle: {
+              backgroundColor: "#1DB954",
+              color: "#000",
+              fontSize: 11,
+              minWidth: 18,
+              height: 18,
+              borderRadius: 9,
+              paddingHorizontal: 4,
+            },
+          }}
+        />
         <Tabs.Screen name="profile" options={{ title: "Профіль" }} />
       </Tabs>
       {!isProfile && currentTrack && <PlayingLayout />}

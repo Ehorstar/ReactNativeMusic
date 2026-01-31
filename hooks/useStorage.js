@@ -3,7 +3,6 @@ import { useEffect } from "react";
 
 const useStorage = (key, data, dispatch, type) => {
 
-    
   useEffect(() => {
     const loadData = async () => {
       try {

@@ -77,6 +77,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#0B0B0F",
     paddingTop: 40,
+    paddingBottom: 40,
   },
 
   header: {
